@@ -53,9 +53,32 @@ class SQLObject
   end
 
   def self.parse_all(results)
+    objects = []
+
+    results.each do |row|
+      attrs = {}
+      attrs = symbolize_keys(row)
+      objects << new(attrs)
+    end
+
+    objects
   end
 
   def self.find(id)
+    attrs = DBConnection.execute(<<-SQL)
+      SELECT
+        *
+      FROM
+        #{table_name}
+      WHERE
+        id = #{id}
+      LIMIT
+        1
+    SQL
+
+    return if attrs.empty?
+    attrs = symbolize_keys(attrs.first)
+    new(attrs)
   end
 
   def initialize(params = {})
@@ -73,9 +96,23 @@ class SQLObject
   end
 
   def attribute_values
+    self.class.columns.map do |att|
+      send(att)
+    end
   end
 
   def insert
+    table_name = self.class.table_name
+    col_names = self.class.columns.join(", ")
+    q_marks = (["?"] * self.class.columns.length).join(", ")
+    col_values = attribute_values
+
+    DBConnection.execute(<<-SQL, *col_values)
+      INSERT INTO
+        #{table_name} (#{col_names})
+      VALUES
+        (#{q_marks})
+    SQL
   end
 
   def update
@@ -85,5 +122,12 @@ class SQLObject
   end
 
   def self.symbolize_keys(hash)
+    new_hash = {}
+
+    hash.each do |key, value|
+      new_hash[key.to_sym] = value
+    end
+
+    new_hash
   end
 end
