@@ -5,7 +5,7 @@ require 'erb'
 require_relative './session'
 
 class ControllerBase
-  attr_reader :req, :res, :params
+  attr_accessor :req, :res, :params, :already_built_response
 
   def initialize(req, res)
     @already_built_response = false
@@ -19,18 +19,18 @@ class ControllerBase
 
   def redirect_to(url)
     raise DoubleRenderError if already_built_response?
-    @res.status = 302
-    @res.set_header('Location', url)
-    @already_built_response = true
+    self.res.status = 302
+    self.res.set_header('Location', url)
     session.store_session(@res)
+    self.already_built_response = true
   end
 
   def render_content(content, content_type)
     raise DoubleRenderError if already_built_response?
     @res['Content-Type'] = content_type
     @res.write(content)
-    @already_built_response = true
     session.store_session(@res)
+    self.already_built_response = true
   end
 
   def render(template_name)
@@ -38,7 +38,7 @@ class ControllerBase
     path = "views/#{controller_name}/#{template_name}.html.erb"
     content = ERB.new(File.read(path)).result(binding)
     render_content(content, "text/html")
-    @already_built_response = true
+    self.already_built_response = true
   end
 
   def session
@@ -47,6 +47,6 @@ class ControllerBase
 
   def invoke_action(name)
     self.send(name)
-    render(name) unless @already_built_response
+    render(name) unless already_built_response?
   end
 end
