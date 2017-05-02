@@ -4,9 +4,31 @@ require 'byebug'
 
 class SQLObject
   def self.columns
+    return @columns unless @columns.nil?
+
+    query = <<-SQL
+      SELECT
+        *
+      FROM
+        #{table_name}
+      LIMIT
+        1
+    SQL
+
+    columns = DBConnection.execute2(query)
+    @columns = columns.first.map(&:to_sym)
   end
 
   def self.finalize!
+    columns.each do |col|
+      define_method(col) { @attributes[col] }
+
+
+      define_method("#{col}=".to_sym) do |val|
+        @attributes ||= {}
+        @attributes[col] = val
+      end
+    end
   end
 
   def self.table_name=(table_name)
@@ -19,6 +41,15 @@ class SQLObject
   end
 
   def self.all
+    query = <<-SQL
+      SELECT
+        *
+      FROM
+        #{table_name}
+    SQL
+
+    data = DBConnection.execute(<<-SQL)
+    parse_all(data)
   end
 
   def self.parse_all(results)
