@@ -9,10 +9,11 @@ require_relative './session'
 class ControllerBase
   attr_accessor :req, :res, :params, :already_built_response
 
-  def initialize(req, res, options)
+  def initialize(req, res, route_params)
     @already_built_response = false
     @req = req
     @res = res
+    @params = route_params.merge(req.params)
   end
 
   def already_built_response?
@@ -47,7 +48,6 @@ class ControllerBase
     @session ||= Session.new(@req)
   end
 
-  # handles default rendering like rails
   def invoke_action(name)
     self.send(name)
     render(name) unless already_built_response?

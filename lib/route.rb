@@ -15,6 +15,15 @@ class Route
   end
 
   def run(req, res)
-    controller_class.new(req, res, {}).invoke_action(action_name)
+    match_data = pattern.match(req.path)
+    route_params = {}
+    unless match_data.nil?
+      debugger
+      names = match_data.names
+      names.each do |name|
+        route_params[name] = match_data[name]
+      end
+    end
+    controller_class.new(req, res, route_params).invoke_action(action_name)
   end
 end
