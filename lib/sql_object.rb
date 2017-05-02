@@ -65,7 +65,7 @@ class SQLObject
   end
 
   def self.find(id)
-    attrs = DBConnection.execute(<<-SQL)
+    query = <<-SQL
       SELECT
         *
       FROM
@@ -76,6 +76,7 @@ class SQLObject
         1
     SQL
 
+    attrs = DBConnection.execute(query)
     return if attrs.empty?
     attrs = symbolize_keys(attrs.first)
     new(attrs)
@@ -96,8 +97,8 @@ class SQLObject
   end
 
   def attribute_values
-    self.class.columns.map do |att|
-      send(att)
+    self.class.columns.map do |attribute|
+      send(attribute)
     end
   end
 
@@ -113,6 +114,9 @@ class SQLObject
       VALUES
         (#{q_marks})
     SQL
+
+    inserted_id = DBConnection.last_insert_row_id
+    self.id = inserted_id
   end
 
   def update
