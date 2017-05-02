@@ -5,7 +5,6 @@ require 'erb'
 require 'byebug'
 require_relative './session'
 
-
 class ControllerBase
   attr_accessor :req, :res, :params, :already_built_response
 

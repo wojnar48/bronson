@@ -1,9 +1,14 @@
 require 'byebug'
 require_relative 'route'
-require 'sourcify'
 
 class Router
   attr_accessor :routes
+
+  [:get, :post, :put, :delete].each do |http_method|
+    define_method(http_method) do |pattern, controller_class, action_name|
+      add_route(pattern, http_method, controller_class, action_name)
+    end
+  end
 
   def initialize
     @routes = []
@@ -15,12 +20,6 @@ class Router
 
   def draw(&proc)
     self.instance_eval(&proc)
-  end
-
-  [:get, :post, :put, :delete].each do |http_method|
-    define_method(http_method) do |pattern, controller_class, action_name|
-      add_route(pattern, http_method, controller_class, action_name)
-    end
   end
 
   def match(req)
