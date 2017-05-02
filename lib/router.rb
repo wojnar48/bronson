@@ -1,38 +1,20 @@
 require 'byebug'
-
-class Route
-  attr_reader :pattern, :http_method, :controller_class, :action_name
-
-  def initialize(pattern, http_method, controller_class, action_name)
-    @pattern = pattern
-    @http_method = http_method
-    @controller_class = controller_class
-    @action_name = action_name
-  end
-
-  def matches?(req)
-    path = req.path
-    method = req.request_method.downcase.to_sym
-    pattern =~ path && http_method == method
-  end
-
-  def run(req, res)
-    controller_class.new(req, res, {}).invoke_action(action_name)
-  end
-end
+require_relative 'route'
+require 'sourcify'
 
 class Router
-  attr_reader :routes
+  attr_accessor :routes
 
   def initialize
     @routes = []
   end
 
   def add_route(pattern, method, controller_class, action_name)
-    @routes << Route.new(pattern, method, controller_class, action_name)
+    self.routes << Route.new(pattern, method, controller_class, action_name)
   end
 
   def draw(&proc)
+    self.instance_eval(&proc)
   end
 
   [:get, :post, :put, :delete].each do |http_method|
@@ -42,7 +24,7 @@ class Router
   end
 
   def match(req)
-    @routes.each do |route|
+    routes.each do |route|
       return route if route.matches?(req)
     end
     nil
