@@ -48,7 +48,7 @@ class SQLObject
         #{table_name}
     SQL
 
-    data = DBConnection.execute(<<-SQL)
+    data = DBConnection.execute(query)
     parse_all(data)
   end
 
