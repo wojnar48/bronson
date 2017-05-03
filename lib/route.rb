@@ -18,7 +18,6 @@ class Route
     match_data = pattern.match(req.path)
     route_params = {}
     unless match_data.nil?
-      debugger
       names = match_data.names
       names.each do |name|
         route_params[name] = match_data[name]

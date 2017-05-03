@@ -120,9 +120,27 @@ class SQLObject
   end
 
   def update
+    table_name = self.class.table_name
+    col_names = self.class.columns.map { |col_name| "#{col_name} = ?" }
+    col_names = col_names.join(",")
+    col_values = attribute_values
+    record_id = self.id
+
+    DBConnection.execute(<<-SQL, *col_values, record_id)
+      UPDATE
+        #{table_name}
+      SET
+        #{col_names}
+      WHERE
+        id = ?
+    SQL
+
+    inserted_id = DBConnection.last_insert_row_id
+    self.id = inserted_id
   end
 
   def save
+    self.attributes.empty? ? insert : update
   end
 
   def self.symbolize_keys(hash)
