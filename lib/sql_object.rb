@@ -1,8 +1,8 @@
-require_relative 'db_connection'
 require 'active_support/inflector'
-require 'byebug'
+require_relative 'db_connection'
+require_relative 'searchable'
 
-class SQLObject
+class SQLObject extend Searchable
   def self.columns
     return @columns unless @columns.nil?
 
