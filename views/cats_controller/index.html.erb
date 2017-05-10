@@ -1,3 +1,10 @@
 <h1>ALL THE CATS</h1>
-<pre><%= @cats.to_s %></pre>
+<ul>
+  <% @cats.each do |cat| %>
+    <li>
+      <p><%= cat.name %></p>
+      <p><%= cat.owner_id %></p>
+    </li>
+  <% end %>
+</ul>
 <a href="/cats/new">New cat!</a>

@@ -22,16 +22,18 @@ class Router
     self.instance_eval(&proc)
   end
 
-  def match(req)
-    routes.each do |route|
-      return route if route.matches?(req)
-    end
+  def match(req, route)
+    # routes.each do |route|
+    #   debugger
+    #   return route if route.matches?(req)
+    # end
+    return route if route.matches?(req)
     nil
   end
 
   def run(req, res)
     @routes.each do |route|
-      match = match(req)
+      match = match(req, route)
       if match
         match.run(req, res)
       else

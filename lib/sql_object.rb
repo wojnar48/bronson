@@ -139,7 +139,7 @@ class SQLObject extend Searchable
   end
 
   def save
-    self.attributes.empty? ? insert : update
+    self.attributes[:id].nil? ? insert : update
   end
 
   def self.symbolize_keys(hash)

@@ -1,10 +1,17 @@
 <form action="/cats" method="POST">
-  <label>Name
-    <input type="text" name="cat[name]" value="<%= @cat.name %>">
+  <label>Cat Name
+    <input type="text" name="name" value="">
   </label>
 
-  <label>Owner
-    <input type="text" name="cat[owner]" value="<%= @cat.owner %>">
+
+
+  <h2>Owner</h2>
+  <label>First Name
+    <input type="text" name="fname" value="">
+  </label>
+
+  <label>Last Name
+    <input type="text" name="lname" value="">
   </label>
 
   <input type="submit">

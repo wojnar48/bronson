@@ -11,7 +11,7 @@ class Route
   def matches?(req)
     path = req.path
     method = req.request_method.downcase.to_sym
-    pattern =~ path && http_method == method
+    pattern =~ (path) && (http_method == method)
   end
 
   def run(req, res)
