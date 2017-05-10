@@ -54,7 +54,6 @@ class SQLObject extend Searchable
 
   def self.parse_all(results)
     objects = []
-
     results.each do |row|
       attrs = {}
       attrs = symbolize_keys(row)
