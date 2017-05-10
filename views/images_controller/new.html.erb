@@ -1,18 +1,50 @@
-<form action="/cats" method="POST">
-  <label>Cat Name
-    <input type="text" name="name" value="">
-  </label>
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Bronson Demo</title>
+    <style>
+      body {
+        width: 900px;
+        margin: 0 auto;
+        font-family: 'Roboto Mono', monospace;
+        background: #FFFFFF;
+        color: #454343;
+      }
 
+      .description {
+        width: 100%;
+      }
 
+      textarea {
+        width: 100%;
+      }
 
-  <h2>Owner</h2>
-  <label>First Name
-    <input type="text" name="fname" value="">
-  </label>
+      .new-form-container {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        margin-top: 200px;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="new-form-container">
+      <h1>Add new ascii art</h1>
+      <form action="/images" method="POST">
+        <label>Description
+          <input class="description" type="text" name="description" value="">
+        </label>
 
-  <label>Last Name
-    <input type="text" name="lname" value="">
-  </label>
+        <br>
+        <br>
 
-  <input type="submit">
-</form>
+        <label for="textarea">Content</labeL>
+        <textarea id="textarea" name="body" rows="10"></textarea>
+
+        <input type="submit">
+      </form>
+    </div>
+  </body>
+</html>

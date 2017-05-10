@@ -4,6 +4,7 @@
     <meta charset="utf-8">
     <title>Bronson Demo</title>
     <link href="https://fonts.googleapis.com/css?family=Roboto+Mono" rel="stylesheet">
+    <link href="/main.css" type="text/css" rel="stylesheet">
     <style>
       body {
         width: 900px;
@@ -42,6 +43,7 @@
   </head>
   <body>
     <h1>\ascii art</h1>
+    <a href="/images/new">Add new image!</a>
     <div class="index-container">
       <ul>
         <% @images.each do |image| %>
@@ -54,6 +56,5 @@
         <% end %>
       </ul>
     </div>
-    <a href="/images/new">Add new image!</a>
   </body>
 </html>

@@ -18,13 +18,25 @@ class ImagesController < ControllerBase
     @images = Image.all
     render('index')
   end
+
+  def new
+  end
+
+  def create
+    @image = Image.new
+    @image.description = params['description']
+    @image.body = params['body']
+    @image.save
+
+    redirect_to('/images')
+  end
 end
 
 router = Router.new
 router.draw do
   get Regexp.new("^/images$"), ImagesController, :index
-  # get Regexp.new("^/cats/new$"), CatsController, :new
-  # post Regexp.new("^/cats$"), CatsController, :create
+  get Regexp.new("^/images/new$"), ImagesController, :new
+  post Regexp.new("^/images$"), ImagesController, :create
 end
 
 app = Proc.new do |env|
