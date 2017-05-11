@@ -25,22 +25,25 @@ Give users the ability to define custom routes using regular expressions which i
 
 ![bronson router_image][bronson_router]
 
-Each Route object stores a regex pattern, http_method, controller class and action name which define how incoming HTTP requests get matched to actions that live on a specific controller. Once a request is matched to one of the Routes, the run method instantiates the correct controller and invokes the requested action by calling the invoke_action method that lives on the ControllerBase class.
+Each Route object stores a regex pattern, http method, controller class and action name which define how incoming HTTP requests get matched to actions that live on a specific controller. Once a request is matched to one of the Routes, the run method instantiates the correct controller and invokes the requested action by calling the invoke_action method that lives on the ControllerBase class.
 
 ![bronson router_run_image][bronson_router_run]
 
-### ControllerBase Class
+To mimic rails functionality, the invoke_action method uses convention to give users the ability to skip the template name when defining actions on the controller. It will automatically look for a template name that matches the name of the action on the controller. In Rails fashion, it also ensures that templates are not double rendered by calling the already_built_response? helper method.
 
 ![bronson invoke_action_image][bronson_invoke_action]
 
+### ControllerBase Class
 
+Provides some of the basic functionality that is familiar to users of Rails' ActionController::Base. By inheriting from ControllerBase, subclasses automatically know where to look for templates that need to be rendered via the render method.
 
-
+![bronson render_image][bronson_render]
 
 ### Example
 
+[bronson_render]: docs/images/render.png
 [bronson_invoke_action]: docs/images/invoke_action.png
-[bronson_router_run]: docs/images/router_run.png
+[bronson_router_run]: docs/images/route_run.png
 [bronson_router]: docs/images/router_routes.png
 [bronson_logo]: docs/images/bronson_logo.png
 [bronson_rack]: docs/images/rack_proc_server.png
