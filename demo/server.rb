@@ -33,6 +33,7 @@ end
 
 router = Router.new
 router.draw do
+  get Regexp.new("^/$"), ImagesController, :index
   get Regexp.new("^/images$"), ImagesController, :index
   get Regexp.new("^/images/new$"), ImagesController, :new
   post Regexp.new("^/images$"), ImagesController, :create

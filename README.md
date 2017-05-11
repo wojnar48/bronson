@@ -41,6 +41,11 @@ Provides some of the basic functionality that is familiar to users of Rails' Act
 
 ### Example
 
+To run the example:
+1. clone the repo
+2. run `ruby demo/server.rb`
+3. navigate to `localhost:3000/` or `localhost:3000/images`
+
 [bronson_render]: docs/images/render.png
 [bronson_invoke_action]: docs/images/invoke_action.png
 [bronson_router_run]: docs/images/route_run.png
