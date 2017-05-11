@@ -25,10 +25,13 @@ Give users the ability to define custom routes using regular expressions which i
 
 ![bronson router_image][bronson_router]
 
+Each Route object stores a regex pattern, http_method, controller class and action name which define how incoming HTTP requests get matched to actions that live on a specific controller. Once a request is matched to one of the Routes, the run method instantiates the correct controller and invokes the requested action by calling the invoke_action method that lives on the ControllerBase class.
 
-
+![bronson router_run_image][bronson_router_run]
 
 ### ControllerBase Class
+
+![bronson invoke_action_image][bronson_invoke_action]
 
 
 
@@ -36,7 +39,8 @@ Give users the ability to define custom routes using regular expressions which i
 
 ### Example
 
-
+[bronson_invoke_action]: docs/images/invoke_action.png
+[bronson_router_run]: docs/images/router_run.png
 [bronson_router]: docs/images/router_routes.png
 [bronson_logo]: docs/images/bronson_logo.png
 [bronson_rack]: docs/images/rack_proc_server.png
