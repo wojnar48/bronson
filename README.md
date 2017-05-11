@@ -19,7 +19,13 @@ Rack middleware is used via the rack gem to provide a convenient interface for w
 ![bronson rack_image][bronson_rack]
 
 
-### Route Class
+### Route & Router Classes
+
+Give users the ability to define custom routes using regular expressions which is akin to the functionality that the routes file provides in Rails. The Router instantiates and stores the different Routes defined by the client.
+
+![bronson router_image][router_routes]
+
+
 
 
 ### ControllerBase Class
@@ -31,5 +37,6 @@ Rack middleware is used via the rack gem to provide a convenient interface for w
 ### Example
 
 
+[bronson_router]: docs/images/router_routes.png
 [bronson_logo]: docs/images/bronson_logo.png
 [bronson_rack]: docs/images/rack_proc_server.png
