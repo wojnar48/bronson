@@ -45,7 +45,7 @@ Exposes functionality to query the database without having to write SQL queries 
 
 ![bronson table_name][bronson_table_name]
 
-At present users have the ability to search, fetch and save records but future releases of Bronson will also include the ability to define associations between records.
+At present, users have the ability to search, fetch and save records but future releases of Bronson will also include the ability to define associations between records.
 
 ### Example
 
