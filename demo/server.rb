@@ -2,7 +2,6 @@ require 'rack'
 require_relative '../lib/controller_base'
 require_relative '../lib/router'
 require_relative '../lib/sql_object'
-require 'byebug'
 
 class Image < SQLObject
   self.finalize!

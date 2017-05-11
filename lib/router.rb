@@ -1,4 +1,3 @@
-require 'byebug'
 require_relative 'route'
 
 class Router
@@ -23,10 +22,6 @@ class Router
   end
 
   def match(req, route)
-    # routes.each do |route|
-    #   debugger
-    #   return route if route.matches?(req)
-    # end
     return route if route.matches?(req)
     nil
   end
