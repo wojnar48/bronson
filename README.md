@@ -39,6 +39,14 @@ Provides some of the basic functionality that is familiar to users of Rails' Act
 
 ![bronson render_image][bronson_render]
 
+### SQLObject ORM
+
+Exposes functionality to query the database without having to write SQL queries in a similar fashion to ActiveRecord::Base in Rails. It uses the active_support/inflector gem to automatically translate the class names to tableized versions. It also provides a table_name= method to give users the ability to override the defaults for names that do not lend themselves to tableization (Human -> humen).
+
+![bronson table_name][bronson_table_name]
+
+At present users have the ability to search, fetch and save records but future releases of Bronson will also include the ability to define associations between records.
+
 ### Example
 
 To run the example:
@@ -51,6 +59,7 @@ To run the example:
 - Add `new` method to conveniently start project
 - Add ability to serve static assets like stylesheets and JavaScript
 
+[bronson_table_name]: docs/images/table_name=.png
 [bronson_render]: docs/images/render.png
 [bronson_invoke_action]: docs/images/invoke_action.png
 [bronson_router_run]: docs/images/route_run.png
