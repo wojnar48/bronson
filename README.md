@@ -14,7 +14,7 @@ Bronson is a lightweight ORM and MVC package implemented in Ruby that mimics som
 
 ### Rack Middleware & Router
 
-Rack middleware is used via the rack gem to provide a convenient interface for working with client requests and responses. Because Rack requires and object that responds to the call method, Bronson uses a Proc to construct such an object which is then passes to Rack Server's start method as visible in the code snippet below.
+Rack middleware is used via the rack gem to provide a convenient interface for working with client requests and responses. Because Rack requires an object that responds to the call method, Bronson uses a Proc to construct such an object which is then passes to Rack Server's start method as visible in the code snippet below.
 
 ![bronson rack_image][bronson_rack]
 
