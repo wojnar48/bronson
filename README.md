@@ -51,7 +51,9 @@ At present, users have the ability to search, fetch and save records but future 
 
 To run the example:
 1. clone the repo
-2. run `ruby demo/server.rb`
+2. cd into the project directory
+3. run `bundle install`
+2. run `ruby demo/start.rb`
 3. navigate to `localhost:3000/` or `localhost:3000/images`
 
 ### Future Direction
