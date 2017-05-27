@@ -2,8 +2,6 @@
 
 Bronson is a lightweight ORM and MVC package implemented in Ruby that mimics some of the basic functionality of Rails.
 
-![bronson image][bronson_logo]
-
 ### Technologies
 - `Ruby`
 - `SQL` for ORM queries
@@ -66,5 +64,4 @@ To run the example:
 [bronson_invoke_action]: docs/images/invoke_action.png
 [bronson_router_run]: docs/images/route_run.png
 [bronson_router]: docs/images/router_routes.png
-[bronson_logo]: docs/images/bronson_logo.png
 [bronson_rack]: docs/images/rack_proc_server.png
